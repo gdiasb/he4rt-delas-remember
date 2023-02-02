@@ -19,11 +19,17 @@ public class EventEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "registered_by")
-    private String registeredBy;
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @Column(name = "created_on")
+    private LocalDate createdOn;
 
     @Column(name = "name")
     private String eventName;
+
+    @Column(name = "status")
+    private boolean eventStatus;
 
     @Column(name = "owner")
     private String eventOwner;
@@ -41,10 +47,12 @@ public class EventEntity {
     public EventEntity() {
     }
 
-    public EventEntity(Long id, String registeredBy, String eventName, String eventOwner, CATEGORIES eventCategory, LocalDate eventDeadline, String eventDescription) {
+    public EventEntity(Long id, String createdBy, LocalDate createdOn, String eventName, boolean eventStatus, String eventOwner, CATEGORIES eventCategory, LocalDate eventDeadline, String eventDescription) {
         this.id = id;
-        this.registeredBy = registeredBy;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
         this.eventName = eventName;
+        this.eventStatus = eventStatus;
         this.eventOwner = eventOwner;
         this.eventCategory = eventCategory;
         this.eventDeadline = eventDeadline;
@@ -55,12 +63,20 @@ public class EventEntity {
         return id;
     }
 
-    public String getRegisteredBy() {
-        return registeredBy;
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public LocalDate getCreatedOn() {
+        return createdOn;
     }
 
     public String getEventName() {
         return eventName;
+    }
+
+    public boolean isEventStatus() {
+        return eventStatus;
     }
 
     public String getEventOwner() {
@@ -96,8 +112,10 @@ public class EventEntity {
     public String toString() {
         final StringBuilder sb = new StringBuilder("EventEntity{");
         sb.append("id=").append(id);
-        sb.append(", registeredBy='").append(registeredBy).append('\'');
+        sb.append(", createdBy='").append(createdBy).append('\'');
+        sb.append(", createdOn=").append(createdOn);
         sb.append(", eventName='").append(eventName).append('\'');
+        sb.append(", eventStatus=").append(eventStatus);
         sb.append(", eventOwner='").append(eventOwner).append('\'');
         sb.append(", eventCategory=").append(eventCategory);
         sb.append(", eventDeadline=").append(eventDeadline);

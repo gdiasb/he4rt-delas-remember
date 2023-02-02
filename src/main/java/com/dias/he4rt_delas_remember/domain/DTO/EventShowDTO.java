@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public record EventShowDTO(
         String eventName,
-        String registeredBy,
+        String createddBy,
         String eventOwner,
         LocalDate eventDeadline
 ) {
