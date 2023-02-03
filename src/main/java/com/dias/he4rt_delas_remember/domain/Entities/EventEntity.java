@@ -16,47 +16,44 @@ import java.time.LocalDate;
 public class EventEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "created_by")
-    private String createdBy;
+    private String createdBy = "Gabriela";
 
     @Column(name = "created_on")
-    private LocalDate createdOn;
+    private LocalDate createdOn = LocalDate.now();
 
-    @Column(name = "name")
-    private String eventName;
+    private String name;
 
-    @Column(name = "status")
-    private boolean eventStatus;
+    private boolean status = false;
 
-    @Column(name = "owner")
-    private String eventOwner;
+    private String owner;
 
-    @Column(name = "category")
     @Enumerated(value = EnumType.STRING)
-    private CATEGORIES eventCategory;
+    private CATEGORIES category;
 
-    @Column(name = "deadline")
-    private LocalDate eventDeadline;
+    private LocalDate deadline;
 
-    @Column(name = "description")
-    private String eventDescription;
+    private String description;
+
+    private String url;
 
     public EventEntity() {
     }
 
-    public EventEntity(Long id, String createdBy, LocalDate createdOn, String eventName, boolean eventStatus, String eventOwner, CATEGORIES eventCategory, LocalDate eventDeadline, String eventDescription) {
+    public EventEntity(Long id, String createdBy, LocalDate createdOn, String name, boolean status, String owner, CATEGORIES category, LocalDate deadline, String description, String url) {
         this.id = id;
         this.createdBy = createdBy;
         this.createdOn = createdOn;
-        this.eventName = eventName;
-        this.eventStatus = eventStatus;
-        this.eventOwner = eventOwner;
-        this.eventCategory = eventCategory;
-        this.eventDeadline = eventDeadline;
-        this.eventDescription = eventDescription;
+        this.name = name;
+        this.status = status;
+        this.owner = owner;
+        this.category = category;
+        this.deadline = deadline;
+        this.description = description;
+        this.url = url;
     }
 
     public Long getId() {
@@ -71,28 +68,60 @@ public class EventEntity {
         return createdOn;
     }
 
-    public String getEventName() {
-        return eventName;
+    public String getName() {
+        return name;
     }
 
-    public boolean isEventStatus() {
-        return eventStatus;
+    public boolean isStatus() {
+        return status;
     }
 
-    public String getEventOwner() {
-        return eventOwner;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
-    public CATEGORIES getEventCategory() {
-        return eventCategory;
+    public String getOwner() {
+        return owner;
     }
 
-    public LocalDate getEventDeadline() {
-        return eventDeadline;
+    public CATEGORIES getCategory() {
+        return category;
     }
 
-    public String getEventDescription() {
-        return eventDescription;
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public void setCategory(CATEGORIES category) {
+        this.category = category;
+    }
+
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
@@ -114,12 +143,13 @@ public class EventEntity {
         sb.append("id=").append(id);
         sb.append(", createdBy='").append(createdBy).append('\'');
         sb.append(", createdOn=").append(createdOn);
-        sb.append(", eventName='").append(eventName).append('\'');
-        sb.append(", eventStatus=").append(eventStatus);
-        sb.append(", eventOwner='").append(eventOwner).append('\'');
-        sb.append(", eventCategory=").append(eventCategory);
-        sb.append(", eventDeadline=").append(eventDeadline);
-        sb.append(", eventDescription='").append(eventDescription).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", owner='").append(owner).append('\'');
+        sb.append(", category=").append(category);
+        sb.append(", deadline=").append(deadline);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", url='").append(url).append('\'');
         sb.append('}');
         return sb.toString();
     }

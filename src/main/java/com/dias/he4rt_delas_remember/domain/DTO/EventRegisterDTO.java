@@ -4,9 +4,8 @@ import com.dias.he4rt_delas_remember.domain.Entities.CATEGORIES;
 
 import java.time.LocalDate;
 
-public record EventShowDTO(
+public record EventRegisterDTO(
         String name,
-        String createdBy,
         String owner,
         CATEGORIES category,
         LocalDate deadline,

@@ -1,5 +1,6 @@
 package com.dias.he4rt_delas_remember.domain.Mappers;
 
+import com.dias.he4rt_delas_remember.domain.DTO.EventRegisterDTO;
 import com.dias.he4rt_delas_remember.domain.DTO.EventShowDTO;
 import com.dias.he4rt_delas_remember.domain.Entities.EventEntity;
 import org.mapstruct.InjectionStrategy;
@@ -9,10 +10,12 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR,
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface EventShowMapper {
+public interface EventMapper {
 
-    EventShowMapper INSTANCE = Mappers.getMapper(EventShowMapper.class);
+    EventMapper INSTANCE = Mappers.getMapper(EventMapper.class);
 
     EventShowDTO toEventShowDTO(EventEntity eventEntity);
 
+
+    EventEntity toEventEntity(EventRegisterDTO eventRegisterDTO);
 }
