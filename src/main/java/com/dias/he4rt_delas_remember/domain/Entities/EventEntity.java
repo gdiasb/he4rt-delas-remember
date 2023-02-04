@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_events")
@@ -23,7 +23,7 @@ public class EventEntity {
     private String createdBy = "Gabriela";
 
     @Column(name = "created_on")
-    private LocalDate createdOn = LocalDate.now();
+    private LocalDateTime createdOn = LocalDateTime.now();
 
     private String name;
 
@@ -34,7 +34,7 @@ public class EventEntity {
     @Enumerated(value = EnumType.STRING)
     private CATEGORIES category;
 
-    private LocalDate deadline;
+    private LocalDateTime deadline;
 
     private String description;
 
@@ -43,7 +43,7 @@ public class EventEntity {
     public EventEntity() {
     }
 
-    public EventEntity(Long id, String createdBy, LocalDate createdOn, String name, boolean status, String owner, CATEGORIES category, LocalDate deadline, String description, String url) {
+    public EventEntity(Long id, String createdBy, LocalDateTime createdOn, String name, boolean status, String owner, CATEGORIES category, LocalDateTime deadline, String description, String url) {
         this.id = id;
         this.createdBy = createdBy;
         this.createdOn = createdOn;
@@ -64,7 +64,7 @@ public class EventEntity {
         return createdBy;
     }
 
-    public LocalDate getCreatedOn() {
+    public LocalDateTime getCreatedOn() {
         return createdOn;
     }
 
@@ -76,10 +76,6 @@ public class EventEntity {
         return status;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
     public String getOwner() {
         return owner;
     }
@@ -88,7 +84,7 @@ public class EventEntity {
         return category;
     }
 
-    public LocalDate getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
@@ -100,8 +96,24 @@ public class EventEntity {
         return url;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public void setOwner(String owner) {
@@ -112,7 +124,7 @@ public class EventEntity {
         this.category = category;
     }
 
-    public void setDeadline(LocalDate deadline) {
+    public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
 

@@ -5,11 +5,12 @@ import com.dias.he4rt_delas_remember.domain.DTO.EventShowDTO;
 import com.dias.he4rt_delas_remember.domain.Entities.EventEntity;
 import com.dias.he4rt_delas_remember.domain.Mappers.EventMapper;
 import com.dias.he4rt_delas_remember.repositories.EventRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,6 +20,7 @@ public class EventService {
 
     private final EventMapper eventMapper;
 
+    @Autowired
     public EventService(EventRepository repository, EventMapper eventMapper) {
         this.eventMapper = eventMapper;
         this.repository = repository;
@@ -32,7 +34,10 @@ public class EventService {
 
         EventEntity eventEntity = eventMapper.toEventEntity(eventRegisterDTO);
 
-        if (!eventRegisterDTO.deadline().isBefore(LocalDate.now())) {
+        System.out.println(eventRegisterDTO);
+        System.out.println(eventEntity);
+
+        if (!eventRegisterDTO.deadline().isBefore(LocalDateTime.now())) {
             eventEntity.setStatus(true);
         } else {
             return ResponseEntity.badRequest().build();
