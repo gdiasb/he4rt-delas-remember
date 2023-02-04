@@ -96,17 +96,17 @@ public class EventEntity {
         return url;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public void setCreatedOn(LocalDateTime createdOn) {
-        this.createdOn = createdOn;
-    }
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public void setCreatedBy(String createdBy) {
+//        this.createdBy = createdBy;
+//    }
+//
+//    public void setCreatedOn(LocalDateTime createdOn) {
+//        this.createdOn = createdOn;
+//    }
 
     public void setName(String name) {
         this.name = name;

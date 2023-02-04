@@ -6,12 +6,12 @@ import com.dias.he4rt_delas_remember.domain.Entities.EventEntity;
 import com.dias.he4rt_delas_remember.domain.Mappers.EventMapper;
 import com.dias.he4rt_delas_remember.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class EventService {
@@ -26,8 +26,9 @@ public class EventService {
         this.repository = repository;
     }
 
-    public List<EventShowDTO> getEvents(Pageable pageable) {
-        return repository.findAll().stream().map(eventMapper::toEventShowDTO).toList();
+    public Page<EventShowDTO> getEvents(Pageable pageable) {
+        return repository.findAll(pageable).map(eventMapper::toEventShowDTO);
+//        return repository.findAll(pageable).stream().map(eventMapper::toEventShowDTO).toList();
     }
 
     public ResponseEntity saveEvent(EventRegisterDTO eventRegisterDTO) {
