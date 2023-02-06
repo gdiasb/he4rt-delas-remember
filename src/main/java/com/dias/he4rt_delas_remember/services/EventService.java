@@ -34,6 +34,11 @@ public class EventService {
         return ResponseEntity.ok(page);
     }
 
+    public ResponseEntity<EventShowDTO> getEventById(Long id) {
+        EventEntity eventEntity = repository.getReferenceById(id);
+        EventShowDTO eventShowDTO = eventMapper.toEventShowDTO(eventEntity);
+        return ResponseEntity.ok(eventShowDTO);
+    }
 
     @Transactional
     public ResponseEntity saveEvent(EventRegisterDTO eventRegisterDTO, UriComponentsBuilder uriComponentsBuilder) {
