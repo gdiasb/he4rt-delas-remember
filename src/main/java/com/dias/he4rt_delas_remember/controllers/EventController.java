@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/v1")
@@ -24,13 +25,14 @@ public class EventController {
     }
 
     @GetMapping(path = "/events")
-    public Page<EventShowDTO> getEvents(@PageableDefault(size = 15) Pageable pageable) {
-        return service.getEvents(pageable);
+    public ResponseEntity<Page<EventShowDTO>> getEvents(@PageableDefault(size = 15) Pageable pageable) {
+        return service.getAllEvents(pageable);
     }
 
 
-    @PostMapping("/event")
-    public ResponseEntity postEvent(@RequestBody EventRegisterDTO eventRegisterDTO) {
-        return service.saveEvent(eventRegisterDTO);
+    @PostMapping("/events")
+    public ResponseEntity postEvent(@RequestBody EventRegisterDTO eventRegisterDTO,
+                                    UriComponentsBuilder uriComponentsBuilder) {
+        return service.saveEvent(eventRegisterDTO, uriComponentsBuilder);
     }
 }

@@ -10,7 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.time.LocalDateTime;
 
 @Service
@@ -26,11 +29,14 @@ public class EventService {
         this.repository = repository;
     }
 
-    public Page<EventShowDTO> getEvents(Pageable pageable) {
-        return repository.findAll(pageable).map(eventMapper::toEventShowDTO);
+    public ResponseEntity<Page<EventShowDTO>> getAllEvents(Pageable pageable) {
+        Page<EventShowDTO> page = repository.findAll(pageable).map(eventMapper::toEventShowDTO);
+        return ResponseEntity.ok(page);
     }
 
-    public ResponseEntity saveEvent(EventRegisterDTO eventRegisterDTO) {
+
+    @Transactional
+    public ResponseEntity saveEvent(EventRegisterDTO eventRegisterDTO, UriComponentsBuilder uriComponentsBuilder) {
 
         EventEntity eventEntity = eventMapper.toEventEntity(eventRegisterDTO);
 
@@ -42,9 +48,14 @@ public class EventService {
         } else {
             return ResponseEntity.badRequest().build();
         }
-        repository.save(eventEntity);
 
-        return ResponseEntity.ok().build();
+        repository.save(eventEntity);
+        URI entityURI =
+                uriComponentsBuilder.path("/events/{id}").buildAndExpand(eventEntity.getId()).toUri();
+
+        EventShowDTO eventShowDTO = eventMapper.toEventShowDTO(eventEntity);
+
+        return ResponseEntity.created(entityURI).body(eventShowDTO);
     }
 
 
