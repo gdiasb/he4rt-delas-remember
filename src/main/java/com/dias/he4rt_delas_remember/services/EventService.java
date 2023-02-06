@@ -28,7 +28,6 @@ public class EventService {
 
     public Page<EventShowDTO> getEvents(Pageable pageable) {
         return repository.findAll(pageable).map(eventMapper::toEventShowDTO);
-//        return repository.findAll(pageable).stream().map(eventMapper::toEventShowDTO).toList();
     }
 
     public ResponseEntity saveEvent(EventRegisterDTO eventRegisterDTO) {
