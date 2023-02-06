@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 public class EventService {
 
     private final EventRepository repository;
-
     private final EventMapper eventMapper;
 
     @Autowired
@@ -41,7 +40,8 @@ public class EventService {
     }
 
     @Transactional
-    public ResponseEntity saveEvent(EventRegisterDTO eventRegisterDTO, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<EventShowDTO> saveEvent(EventRegisterDTO eventRegisterDTO,
+                                                  UriComponentsBuilder uriComponentsBuilder) {
 
         EventEntity eventEntity = eventMapper.toEventEntity(eventRegisterDTO);
 
@@ -61,6 +61,15 @@ public class EventService {
         EventShowDTO eventShowDTO = eventMapper.toEventShowDTO(eventEntity);
 
         return ResponseEntity.created(entityURI).body(eventShowDTO);
+    }
+
+
+    @Transactional
+    public ResponseEntity<Void> inactiveEvent(Long id) {
+        EventEntity eventEntity = repository.getReferenceById(id);
+        eventEntity.setStatus(false);
+
+        return ResponseEntity.noContent().build();
     }
 
 

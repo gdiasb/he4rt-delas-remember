@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,14 +32,19 @@ public class EventController {
     }
 
     @GetMapping(path = "/events/{id}")
-    public ResponseEntity getEventById(@PathVariable Long id) {
+    public ResponseEntity<EventShowDTO> getEventById(@PathVariable Long id) {
         return service.getEventById(id);
     }
 
 
     @PostMapping("/events")
-    public ResponseEntity postEvent(@RequestBody EventRegisterDTO eventRegisterDTO,
-                                    UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<EventShowDTO> postEvent(@RequestBody EventRegisterDTO eventRegisterDTO,
+                                                  UriComponentsBuilder uriComponentsBuilder) {
         return service.saveEvent(eventRegisterDTO, uriComponentsBuilder);
+    }
+
+    @DeleteMapping(path = "/events/{id}")
+    public ResponseEntity<Void> inactiveById(@PathVariable Long id) {
+        return service.inactiveEvent(id);
     }
 }
