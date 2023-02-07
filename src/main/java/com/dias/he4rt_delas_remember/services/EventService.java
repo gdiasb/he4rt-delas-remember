@@ -2,6 +2,7 @@ package com.dias.he4rt_delas_remember.services;
 
 import com.dias.he4rt_delas_remember.domain.DTO.EventRegisterDTO;
 import com.dias.he4rt_delas_remember.domain.DTO.EventShowDTO;
+import com.dias.he4rt_delas_remember.domain.DTO.EventUpdateDTO;
 import com.dias.he4rt_delas_remember.domain.Entities.EventEntity;
 import com.dias.he4rt_delas_remember.domain.Mappers.EventMapper;
 import com.dias.he4rt_delas_remember.repositories.EventRepository;
@@ -61,6 +62,22 @@ public class EventService {
         EventShowDTO eventShowDTO = eventMapper.toEventShowDTO(eventEntity);
 
         return ResponseEntity.created(entityURI).body(eventShowDTO);
+    }
+
+
+    @Transactional
+    public ResponseEntity<EventShowDTO> updateEvent(Long id, EventUpdateDTO eventUpdateDTO) {
+
+        EventEntity eventEntity = repository.getReferenceById(id);
+        if (eventUpdateDTO.name() != null) eventEntity.setName(eventUpdateDTO.name());
+        if (eventUpdateDTO.deadline() != null) eventEntity.setDeadline(eventUpdateDTO.deadline());
+        if (eventUpdateDTO.description() != null)
+            eventEntity.setDescription(eventUpdateDTO.description());
+        if (eventUpdateDTO.url() != null) eventEntity.setUrl(eventUpdateDTO.url());
+
+        EventShowDTO eventShowDTO = eventMapper.toEventShowDTO(eventEntity);
+
+        return ResponseEntity.ok().body(eventShowDTO);
     }
 
 

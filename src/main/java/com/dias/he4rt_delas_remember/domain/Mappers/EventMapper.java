@@ -15,6 +15,6 @@ public interface EventMapper {
 
     EventShowDTO toEventShowDTO(EventEntity eventEntity);
 
-
     EventEntity toEventEntity(EventRegisterDTO eventRegisterDTO);
+
 }
