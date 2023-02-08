@@ -4,6 +4,7 @@ import com.dias.he4rt_delas_remember.domain.DTO.EventRegisterDTO;
 import com.dias.he4rt_delas_remember.domain.DTO.EventShowDTO;
 import com.dias.he4rt_delas_remember.domain.DTO.EventUpdateDTO;
 import com.dias.he4rt_delas_remember.services.EventService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -45,14 +46,14 @@ public class EventController {
 
 
     @PostMapping("/events")
-    public ResponseEntity<EventShowDTO> postEvent(@RequestBody EventRegisterDTO eventRegisterDTO,
+    public ResponseEntity<EventShowDTO> postEvent(@Valid @RequestBody EventRegisterDTO eventRegisterDTO,
                                                   UriComponentsBuilder uriComponentsBuilder) {
         return service.saveEvent(eventRegisterDTO, uriComponentsBuilder);
     }
 
     @PutMapping("/events/{id}")
     public ResponseEntity<EventShowDTO> updateById(@PathVariable Long id,
-                                                   @RequestBody EventUpdateDTO eventUpdateDTO) {
+                                                   @Valid @RequestBody EventUpdateDTO eventUpdateDTO) {
         return service.updateEvent(id, eventUpdateDTO);
     }
 
