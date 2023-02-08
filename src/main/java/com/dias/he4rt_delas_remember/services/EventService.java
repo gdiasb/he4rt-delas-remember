@@ -40,9 +40,12 @@ public class EventService {
         return ResponseEntity.ok(eventShowDTO);
     }
 
-    public ResponseEntity getAllActiveEvents() {
+    public ResponseEntity<Page<EventShowDTO>> getAllActiveEvents(Pageable pageable) {
         repository.updateActiveEvents(LocalDateTime.now());
-        return ResponseEntity.ok().build();
+        Page<EventShowDTO> page =
+                repository.findAllByStatusTrue(pageable).map(eventMapper::toEventShowDTO);
+
+        return ResponseEntity.ok(page);
     }
 
     @Transactional

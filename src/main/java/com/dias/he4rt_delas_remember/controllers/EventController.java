@@ -38,9 +38,9 @@ public class EventController {
         return service.getEventById(id);
     }
 
-    @GetMapping(path = "/update")
-    public ResponseEntity updateActives() {
-        return service.getAllActiveEvents();
+    @GetMapping(path = "/events/actives")
+    public ResponseEntity getActiveEvents(@PageableDefault(size = 15, sort = "deadline") Pageable pageable) {
+        return service.getAllActiveEvents(pageable);
     }
 
 
