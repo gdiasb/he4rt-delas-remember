@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@RestController
+@Controller
 @RequestMapping("/v1")
 public class EventController {
 
@@ -36,6 +36,11 @@ public class EventController {
     @GetMapping(path = "/events/{id}")
     public ResponseEntity<EventShowDTO> getEventById(@PathVariable Long id) {
         return service.getEventById(id);
+    }
+
+    @GetMapping(path = "/update")
+    public ResponseEntity updateActives() {
+        return service.getAllActiveEvents();
     }
 
 

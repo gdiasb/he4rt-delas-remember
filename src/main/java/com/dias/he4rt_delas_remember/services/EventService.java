@@ -40,6 +40,11 @@ public class EventService {
         return ResponseEntity.ok(eventShowDTO);
     }
 
+    public ResponseEntity getAllActiveEvents() {
+        repository.updateActiveEvents(LocalDateTime.now());
+        return ResponseEntity.ok().build();
+    }
+
     @Transactional
     public ResponseEntity<EventShowDTO> saveEvent(EventRegisterDTO eventRegisterDTO,
                                                   UriComponentsBuilder uriComponentsBuilder) {
