@@ -16,6 +16,7 @@ public record EventRegisterDTO(
         @NotBlank
         String owner,
 
+        @NotNull
         CATEGORIES category,
 
         @NotNull @Future
