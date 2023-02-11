@@ -13,15 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        return new InMemoryUserDetailsManager(User
-//                .withUsername("gab")
-//                .password("1234")
-//                .authorities("ADMIN", "USER")
-//                .build());
-//    }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
