@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  app:
+    image: 'he4rt_delas_remember:latest'
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/he4rt
+      - SPRING_DATASOURCE_USERNAME=dias
+      - SPRING_DATASOURCE_PASSWORD=2401
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
+  db:
+    image: 'postgres:15.1-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_DB=he4rt
+      - POSTGRES_USER=dias
+      - POSTGRES_PASSWORD=2401
